@@ -1,0 +1,138 @@
+ 
+package languagetranslator;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+ 
+public class LanguageTranslator extends JFrame implements ActionListener
+{
+    JLabel lstate,l1;
+    JTextField text; 
+    JButton b;
+    JRadioButton r1,r2,r3;
+    JComboBox state;
+    
+    public LanguageTranslator()
+    {
+    
+    state=new JComboBox();
+    state.addItem("Hello...!");
+    state.addItem("Hii...!");
+    state.addItem("Welcome");
+    state.addItem("Thank You");
+    state.setBounds(20,30,100,30 );
+    
+    l1=new JLabel("Message");
+    l1.setBounds(130,30,60,30);
+    text=new JTextField();
+    text.setBounds(190,30,100,30);
+    
+    r1=new JRadioButton("chinese");
+    r1.setBounds (20,70,80,30);
+    r2=new JRadioButton("japaniese");
+    r2.setBounds(110,70,80,30);
+    r3=new JRadioButton("french");
+    r3.setBounds(200,70,80,30);
+    
+    b=new JButton("Submit");
+    b.setBounds(20,110,100,30);
+    
+    
+    add(state);
+    add(l1);
+    add(text);
+    ButtonGroup bg=new ButtonGroup(); 
+    bg.add(r1);
+    bg.add(r2);
+    bg.add(r3);
+    add(r1);
+    add(r2);
+    add(r3);
+    add(b);
+    
+    b.addActionListener(this);
+    
+    setTitle("LanguageTranslator");
+    setSize(1400,900);
+    setLayout(null);
+    setVisible(true);
+     
+    }
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        Locale l=new Locale("zh","CN");
+        Locale l1=new Locale("fr","FR");
+        Locale l2=new Locale("ja","JP");
+        ResourceBundle rs1=ResourceBundle.getBundle("LanguageTranslator",l);
+        ResourceBundle rs2=ResourceBundle.getBundle("LanguageTranslator",l1);
+        ResourceBundle rs3=ResourceBundle.getBundle("LanguageTranslator",l2);
+        
+        
+        String value=state.getSelectedItem().toString();
+        if(e.getSource()==b)
+        {
+            if(r1.isSelected())
+            {
+                switch(value)
+                {
+                    case "Hello...!":text.setText(rs1.getString("m"));
+                                 break;
+                    case "Hii...!":text.setText(rs1.getString("m1"));
+                                 break;
+                    case "Welcome":text.setText(rs1.getString("m2"));
+                                 break;
+                    case "Thank You":text.setText(rs1.getString("m3"));
+                                 break;
+                }
+            }
+            
+            
+            else if(r2.isSelected())
+            {
+                switch(value)
+                {
+                    case "Hello...!":text.setText(rs2.getString("m"));
+                                 break;
+                    case "Hii...!":text.setText(rs2.getString("m1"));
+                                 break;
+                    case "Welcome":text.setText(rs2.getString("m2"));
+                                 break;
+                    case "Thank You":text.setText(rs2.getString("m3"));
+                                 break;
+                }
+            }
+            
+            else if(r3.isSelected())
+            {
+                switch(value)
+                {
+                    case "Hello...!":text.setText(rs3.getString("m"));
+                                 break;
+                    case "Hii...!":text.setText(rs3.getString("m1"));
+                                 break;
+                    case "Welcome":text.setText(rs3.getString("m2"));
+                                 break;
+                    case "Thank You":text.setText(rs3.getString("m3"));
+                                 break;
+                }
+            }
+        }
+    }
+    public static void main(String[] args) 
+    {
+         LanguageTranslator d=new LanguageTranslator();
+    }
+
+}
